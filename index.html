@@ -1,0 +1,2452 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combinatorics Learning Lab – Interactive Mathematics for Computing | MCA Assignment</title>
+  <meta name="description" content="Interactive MCA Foundation of Mathematics web lab covering all 12 topics of Unit 1: Combinatorics and Its Applications with working calculators, visualizations, and step-by-step solutions.">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- =========================================================================
+       SIDEBAR NAVIGATION
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <aside class="app-sidebar" id="app-sidebar">
+    <div class="sidebar-header">
+      <div class="brand-wrapper">
+        <div class="brand-icon">∑</div>
+        <div class="brand-info">
+          <h1>Combinatorics Lab</h1>
+          <div class="brand-badge">MCA • Math for Computing</div>
+        </div>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close Sidebar">&times;</button>
+      </div>
+
+      <!-- Learning Progress Tracker -->
+      <div class="sidebar-progress">
+        <div class="progress-label-row">
+          <span>Unit 1 Progress</span>
+          <span id="sidebar-progress-label">0 / 12 Explored (0%)</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="sidebar-progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <nav class="sidebar-menu">
+      <div class="menu-category-title">Core Overview</div>
+      <button class="nav-item active" data-view="home">
+        <span class="nav-icon">🏠</span>
+        <span>Dashboard & Overview</span>
+      </button>
+
+      <div class="menu-category-title">12 Unit Topics</div>
+      <button class="nav-item" data-view="module1">
+        <span class="nav-icon">🔐</span>
+        <span>1. Intro & CS Applications</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module2">
+        <span class="nav-icon">➕</span>
+        <span>2. Basic Counting Principles</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module3">
+        <span class="nav-icon">🔀</span>
+        <span>3. Permutations (nPr & Reps)</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module4">
+        <span class="nav-icon">🎯</span>
+        <span>4. Combinations & Identities</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module5">
+        <span class="nav-icon">📐</span>
+        <span>5. Binomial Theorem</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module6">
+        <span class="nav-icon">🕊️</span>
+        <span>6. Pigeonhole Principle</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module7">
+        <span class="nav-icon">⭕</span>
+        <span>7. Inclusion–Exclusion</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module8">
+        <span class="nav-icon">✉️</span>
+        <span>8. Derangements & Prob.</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module9">
+        <span class="nav-icon">⭐</span>
+        <span>9. Multisets & Repetition</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module10">
+        <span class="nav-icon">🧱</span>
+        <span>10. Partitions & Compositions</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module11">
+        <span class="nav-icon">🔄</span>
+        <span>11. Recurrence Relations</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+      <button class="nav-item" data-view="module12">
+        <span class="nav-icon">📈</span>
+        <span>12. Generating Functions</span>
+        <span class="nav-badge-dot"></span>
+      </button>
+
+      <div class="menu-category-title">Evaluation & Reference</div>
+      <button class="nav-item" data-view="quiz">
+        <span class="nav-icon">📝</span>
+        <span>MCQ Assessment Quiz</span>
+      </button>
+      <button class="nav-item" data-view="formulas">
+        <span class="nav-icon">📖</span>
+        <span>Formula Cheat Sheet</span>
+      </button>
+      <button class="nav-item" data-view="csapps">
+        <span class="nav-icon">💻</span>
+        <span>CS Applications Portal</span>
+      </button>
+      <button class="nav-item" data-view="glossary">
+        <span class="nav-icon">📚</span>
+        <span>Math Glossary</span>
+      </button>
+      <button class="nav-item" data-view="about">
+        <span class="nav-icon">🎓</span>
+        <span>Assignment & Evaluation</span>
+      </button>
+    </nav>
+
+    <!-- Student Details Footer -->
+    <div class="sidebar-footer">
+      <div class="student-quick-info" id="btn-edit-student" title="Click to view/edit student details">
+        <div class="student-avatar">M</div>
+        <div class="student-text">
+          <div class="student-name-display display-student-name">Nilesh V.</div>
+          <div style="font-size: 0.7rem; color: var(--text-muted);"><span class="display-student-programme">MCA</span> • Sem <span class="display-student-semester">1</span></div>
+        </div>
+      </div>
+      <div style="font-size:0.68rem; color:var(--text-muted); text-align:center;">
+        Academic Year: <span class="display-student-year">2026–27</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main class="app-main">
+    
+    <!-- Top Navigation Header -->
+    <header class="top-navbar">
+      <div class="nav-left">
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation">☰</button>
+        <div class="breadcrumbs">
+          <span>Combinatorics Lab</span>
+          <span>/</span>
+          <span class="current" id="breadcrumb-current">Dashboard</span>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button class="action-btn btn-accent" id="btn-launch-demo" title="Run Step-by-Step Faculty Demonstration">
+          <span>▶</span>
+          <span>Demo Mode</span>
+        </button>
+        <button class="action-btn" id="btn-print-report" title="Print Assignment Summary">
+          <span>🖨️</span>
+          <span>Print Report</span>
+        </button>
+        <button class="action-btn theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Theme">
+          <span id="theme-toggle-icon">☀️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- =======================================================================
+         VIEW: HOME / DASHBOARD
+         ======================================================================= -->
+    <section class="page-view active" id="view-home" data-page-title="Dashboard & Overview">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">MCA SEMESTER 1 ASSIGNMENT</span>
+          <span class="mca-badge">Foundation of Mathematics • Unit 1</span>
+        </div>
+        <h1 class="module-title">Combinatorics Learning Lab</h1>
+        <p class="module-subtitle">
+          An interactive, mathematically rigorous learning platform designed for Master of Computer Applications (MCA) students. Explore counting principles, permutations, binomial theorem, pigeonhole distributions, recurrences, and generating functions with real-world computer science simulations.
+        </p>
+      </div>
+
+      <!-- Student Banner Card -->
+      <div class="card" style="margin-bottom:1.75rem; border-left:4px solid var(--accent-blue);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); font-weight:700;">Student Evaluation Profile</div>
+            <div style="font-size:1.15rem; font-weight:700; color:var(--text-primary); margin-top:0.2rem;">
+              <span class="display-student-name">Nilesh V.</span> (Enrolment: <span class="display-student-enrolment">MCA2026001</span>)
+            </div>
+            <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.2rem;">
+              <span class="display-student-programme">Master of Computer Applications</span> | Semester: <span class="display-student-semester">1</span> | Div: <span class="display-student-division">A</span> | Year: <span class="display-student-year">2026–27</span>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="action-btn" onclick="document.getElementById('btn-edit-student').click();">Edit Details</button>
+            <button class="action-btn btn-primary" onclick="window.navigateTo('about');">Faculty Viva Sheet</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Topic Grid (All 12 Modules) -->
+      <h2 style="font-size:1.2rem; font-weight:700; margin-bottom:1rem; color:var(--text-primary);">
+        Curriculum Modules — 12 Working Mathematics Calculators
+      </h2>
+
+      <div class="grid-3col">
+        <!-- Module 1 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module1');">
+          <div class="card-title">
+            <span class="card-title-icon">🔐</span>
+            <span>Module 1: Intro & Security</span>
+          </div>
+          <p class="card-description">
+            Explore why combinatorics underpins computing. Test brute-force password search spaces and routing grid paths.
+          </p>
+          <span class="unit-tag">Counting Space</span>
+        </div>
+
+        <!-- Module 2 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module2');">
+          <div class="card-title">
+            <span class="card-title-icon">➕</span>
+            <span>Module 2: Addition & Product Rules</span>
+          </div>
+          <p class="card-description">
+            Distinguish mutually exclusive events from multi-stage sequential pipelines. Includes interactive PC builder.
+          </p>
+          <span class="unit-tag">Sum & Product</span>
+        </div>
+
+        <!-- Module 3 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module3');">
+          <div class="card-title">
+            <span class="card-title-icon">🔀</span>
+            <span>Module 3: Permutations</span>
+          </div>
+          <p class="card-description">
+            Calculate nPr, distinct object orders (n!), repetition (n^r), and identical repeated elements (MISSISSIPPI anagrams).
+          </p>
+          <span class="unit-tag">Ordered Sequences</span>
+        </div>
+
+        <!-- Module 4 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module4');">
+          <div class="card-title">
+            <span class="card-title-icon">🎯</span>
+            <span>Module 4: Combinations</span>
+          </div>
+          <p class="card-description">
+            Compute nCr selections, verify Pascal's and Symmetry identities, and inspect the interactive Pascal Pyramid.
+          </p>
+          <span class="unit-tag">Unordered Subsets</span>
+        </div>
+
+        <!-- Module 5 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module5');">
+          <div class="card-title">
+            <span class="card-title-icon">📐</span>
+            <span>Module 5: Binomial Theorem</span>
+          </div>
+          <p class="card-description">
+            Expand (a+b)^n algebraically and verify terms against direct numerical power substitution.
+          </p>
+          <span class="unit-tag">Binomial Expansion</span>
+        </div>
+
+        <!-- Module 6 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module6');">
+          <div class="card-title">
+            <span class="card-title-icon">🕊️</span>
+            <span>Module 6: Pigeonhole Principle</span>
+          </div>
+          <p class="card-description">
+            Demonstrate ceil(N/k) bounds with animated balls-and-boxes and prove hash table collision inevitability.
+          </p>
+          <span class="unit-tag">Pigeonhole & Hash</span>
+        </div>
+
+        <!-- Module 7 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module7');">
+          <div class="card-title">
+            <span class="card-title-icon">⭕</span>
+            <span>Module 7: Inclusion–Exclusion</span>
+          </div>
+          <p class="card-description">
+            Calculate 2-set and 3-set unions with rigorous constraint validation and an interactive SVG Venn Diagram.
+          </p>
+          <span class="unit-tag">Set Cardinality</span>
+        </div>
+
+        <!-- Module 8 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module8');">
+          <div class="card-title">
+            <span class="card-title-icon">✉️</span>
+            <span>Module 8: Derangements</span>
+          </div>
+          <p class="card-description">
+            Compute zero-fixed-point permutations D(n), observe convergence to 1/e, and simulate task reassignment.
+          </p>
+          <span class="unit-tag">Subfactorials</span>
+        </div>
+
+        <!-- Module 9 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module9');">
+          <div class="card-title">
+            <span class="card-title-icon">⭐</span>
+            <span>Module 9: Multisets & Stars</span>
+          </div>
+          <p class="card-description">
+            Visualize the Stars and Bars theorem C(n+r-1, r) and compare the 4 fundamental counting models side-by-side.
+          </p>
+          <span class="unit-tag">Stars & Bars</span>
+        </div>
+
+        <!-- Module 10 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module10');">
+          <div class="card-title">
+            <span class="card-title-icon">🧱</span>
+            <span>Module 10: Partitions & Compositions</span>
+          </div>
+          <p class="card-description">
+            Differentiate ordered compositions 2^(n-1) from unordered integer partitions p(n) with Ferrers diagrams.
+          </p>
+          <span class="unit-tag">Number Partitions</span>
+        </div>
+
+        <!-- Module 11 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module11');">
+          <div class="card-title">
+            <span class="card-title-icon">🔄</span>
+            <span>Module 11: Recurrence Relations</span>
+          </div>
+          <p class="card-description">
+            Model Fibonacci, Tower of Hanoi, and Divide-and-Conquer algorithms. Compare iterative vs recursive step counts.
+          </p>
+          <span class="unit-tag">Algorithmic Recurrence</span>
+        </div>
+
+        <!-- Module 12 Card -->
+        <div class="card" style="cursor:pointer;" onclick="window.navigateTo('module12');">
+          <div class="card-title">
+            <span class="card-title-icon">📈</span>
+            <span>Module 12: Generating Functions</span>
+          </div>
+          <p class="card-description">
+            Multiply polynomial generating functions (convolutions) and solve target-sum coin change counting problems.
+          </p>
+          <span class="unit-tag">Formal Power Series</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 1 - Introduction to Combinatorics
+         ======================================================================= -->
+    <section class="page-view" id="view-module1" data-page-title="Module 1: Introduction to Combinatorics">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 1 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Introduction to Combinatorics & Its Applications</h2>
+        <p class="module-subtitle">
+          Combinatorics is the branch of discrete mathematics concerned with counting, arrangement, and operational structure. In computer science, combinatorics governs search complexity, cryptographic key strength, compiler parsing, and network topology.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Definition & Formula -->
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">📘</span> Theoretical Foundation</div>
+          <p class="card-description">
+            Combinatorics provides analytical techniques to quantify discrete configuration spaces without enumerating every possible element by hand.
+          </p>
+          <div class="formula-box">
+            <span class="formula-notation">Search Space: |Ω| = |Σ|^L</span>
+            <span class="formula-tag">Sequence Rule</span>
+          </div>
+          <div class="formula-box">
+            <span class="formula-notation">Grid Paths: C(m + n, m) = (m + n)! / (m! · n!)</span>
+            <span class="formula-tag">Lattice Path</span>
+          </div>
+        </div>
+
+        <!-- CS Applications -->
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">💻</span> Real-World Computer Science Applications</div>
+          <ul style="padding-left:1.2rem; font-size:0.88rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.4rem;">
+            <li><strong>Password & Key Space:</strong> Cryptographic entropy relies on exponential search spaces |Σ|^L to resist brute-force attacks.</li>
+            <li><strong>Algorithm Analysis:</strong> Quantifying worst-case state transitions (e.g. traveling salesperson search spaces n!).</li>
+            <li><strong>Database Query Optimization:</strong> Join tree orders for n tables equal (2n - 2)! / (n - 1)!.</li>
+            <li><strong>Network Routing:</strong> Monotonic packet routing paths in mesh networks.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Interactive Workbench 1: Password Space & Entropy -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Simulator 1A: Password Search Space & Brute-Force Time</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Examine how alphabet cardinality and sequence length govern computing security</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m1-charset').value='26'; document.getElementById('m1-length').value='6'; document.getElementById('m1-length').dispatchEvent(new Event('input'));">Preset: 6-char Alpha</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m1-charset').value='62'; document.getElementById('m1-length').value='12'; document.getElementById('m1-length').dispatchEvent(new Event('input'));">Preset: 12-char Strong</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m1-charset">Character Set (|Σ|)</label>
+            <select class="form-select" id="m1-charset">
+              <option value="10">Numeric Digits [0-9] (|Σ| = 10)</option>
+              <option value="26">Lowercase Letters [a-z] (|Σ| = 26)</option>
+              <option value="52">Case-Sensitive Letters [a-zA-Z] (|Σ| = 52)</option>
+              <option value="62" selected>Alphanumeric [a-zA-Z0-9] (|Σ| = 62)</option>
+              <option value="95">Full Printable ASCII (|Σ| = 95)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m1-length">Password Length (L): <span id="m1-length-val" style="color:var(--accent-blue); font-weight:700;">8</span></label>
+            <input type="range" class="form-input" id="m1-length" min="4" max="16" value="8" style="padding:0.4rem;">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m1-speed">Attacker Compute Speed</label>
+            <select class="form-select" id="m1-speed">
+              <option value="1000000">1 Million Hashes/sec (Standard CPU)</option>
+              <option value="1000000000" selected>1 Billion Hashes/sec (RTX 4090 GPU)</option>
+              <option value="1000000000000">1 Trillion Hashes/sec (ASIC Cluster)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Total Combinatorial Keyspace (|Ω|)</div>
+              <div class="result-value-big" id="m1-res-combinations">0</div>
+            </div>
+            <div>
+              <div class="result-label">Shannon Entropy</div>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; color:var(--accent-emerald);" id="m1-res-entropy">0 bits</div>
+            </div>
+            <div>
+              <div class="result-label">Est. Exhaustive Crack Time</div>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; color:var(--accent-rose);" id="m1-res-time">0</div>
+            </div>
+          </div>
+          <div class="step-trace-container" id="m1-trace-box"></div>
+        </div>
+      </div>
+
+      <!-- Interactive Workbench 1B: Network Routing Grid Paths -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Simulator 1B: Lattice Grid Routing Paths</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Count monotonic packet paths from (0,0) to (m, n) via combinations C(m+n, m)</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m1-grid-m">Grid Width m (East moves)</label>
+            <input type="number" class="form-input" id="m1-grid-m" min="1" max="10" value="3">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m1-grid-n">Grid Height n (North moves)</label>
+            <input type="number" class="form-input" id="m1-grid-n" min="1" max="10" value="3">
+          </div>
+          <button class="action-btn btn-primary" id="m1-grid-btn">Calculate Paths</button>
+        </div>
+
+        <div class="grid-2col" style="align-items:center;">
+          <div>
+            <div class="result-label">Total Monotonic Paths: <span class="result-value-big" id="m1-grid-res" style="font-size:1.5rem;">20</span></div>
+            <div class="step-trace-container" id="m1-grid-trace"></div>
+          </div>
+          <div style="display:flex; justify-content:center; background:var(--bg-card); padding:1rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+            <canvas id="m1-grid-canvas" width="280" height="220" style="max-width:100%;"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>Length L = 0:</span> <span class="edge-case-val">|Σ|^0 = 1 (Empty String)</span></div>
+          <div class="edge-case-item"><span>Grid 0 x n:</span> <span class="edge-case-val">C(n, 0) = 1 (Straight line)</span></div>
+          <div class="edge-case-item"><span>BigInt Protection:</span> <span class="edge-case-val">Handles &gt; 10¹⁸ accurately</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Combinatorial growth is exponential. Adding just one character to a password expands the brute-force search space by a factor of |Σ|, demonstrating why combinatorics is foundational to cybersecurity and computational complexity.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 2 - Basic Counting Principles
+         ======================================================================= -->
+    <section class="page-view" id="view-module2" data-page-title="Module 2: Basic Counting Principles">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 2 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Basic Counting Principles — Addition and Multiplication Rules</h2>
+        <p class="module-subtitle">
+          The two cornerstones of combinatorial reasoning: the Sum Rule (Addition) for mutually exclusive alternatives, and the Product Rule (Multiplication) for sequential multi-stage actions.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Sum Rule -->
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">➕</span> The Addition Rule (Disjoint Choices)</div>
+          <p class="card-description">
+            If an action can be performed by choosing from set A (|A| ways) <strong>OR</strong> set B (|B| ways), and no option is in both sets (A ∩ B = ∅), total choices = |A| + |B|.
+          </p>
+          <div class="formula-box">
+            <span class="formula-notation">|A ∪ B| = |A| + |B|  (when A ∩ B = ∅)</span>
+            <span class="formula-tag">Sum Rule</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary);">
+            <strong>Computing Example:</strong> A user can authenticate via Password (5 options) OR Google SSO (1 option) OR Passkey (2 options). Mutually exclusive = 5 + 1 + 2 = 8 ways.
+          </p>
+        </div>
+
+        <!-- Product Rule -->
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">✖️</span> The Multiplication Rule (Sequential Stages)</div>
+          <p class="card-description">
+            If an action consists of Stage 1 (|A| choices) followed <strong>AND</strong> by Stage 2 (|B| choices), total compound outcomes = |A| × |B|.
+          </p>
+          <div class="formula-box">
+            <span class="formula-notation">|A × B| = |A| × |B|</span>
+            <span class="formula-tag">Product Rule</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary);">
+            <strong>Computing Example:</strong> A multi-stage 3-factor login pipeline: Username/Password (Step 1) AND SMS OTP (Step 2) AND Fingerprint (Step 3).
+          </p>
+        </div>
+      </div>
+
+      <!-- Calculators -->
+      <div class="grid-2col">
+        <!-- Addition Calculator -->
+        <div class="card workbench-card">
+          <div class="card-title">Addition Rule Calculator (Mutually Exclusive)</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="m2-add-a">Option Set A</label>
+              <input type="number" class="form-input" id="m2-add-a" min="0" value="8">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m2-add-b">Option Set B</label>
+              <input type="number" class="form-input" id="m2-add-b" min="0" value="5">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m2-add-c">Option Set C</label>
+              <input type="number" class="form-input" id="m2-add-c" min="0" value="4">
+            </div>
+          </div>
+          <div class="result-display-panel">
+            <div class="result-label">Total Mutually Exclusive Choices:</div>
+            <div class="result-value-big" id="m2-add-res">17</div>
+            <div class="step-trace-container" id="m2-add-trace"></div>
+          </div>
+        </div>
+
+        <!-- Multiplication Calculator -->
+        <div class="card workbench-card">
+          <div class="card-title">Multiplication Rule Calculator (Multi-Stage)</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="m2-mul-a">Stage 1 Choices</label>
+              <input type="number" class="form-input" id="m2-mul-a" min="1" value="4">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m2-mul-b">Stage 2 Choices</label>
+              <input type="number" class="form-input" id="m2-mul-b" min="1" value="6">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m2-mul-c">Stage 3 Choices</label>
+              <input type="number" class="form-input" id="m2-mul-c" min="1" value="3">
+            </div>
+          </div>
+          <div class="result-display-panel">
+            <div class="result-label">Total Compound Sequential Outcomes:</div>
+            <div class="result-value-big" id="m2-mul-res">72</div>
+            <div class="step-trace-container" id="m2-mul-trace"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-World CS Builder: PC Configuration -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Computer Hardware Configuration Builder</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Real-world multi-stage Cartesian product for server hardware procurement</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m2-cfg-cpu">CPU Options (Intel, AMD, ARM)</label>
+            <input type="number" class="form-input" id="m2-cfg-cpu" min="1" max="10" value="3">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m2-cfg-ram">RAM Options (8G, 16G, 32G, 64G)</label>
+            <input type="number" class="form-input" id="m2-cfg-ram" min="1" max="10" value="4">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m2-cfg-gpu">GPU Options (Integr, Mid, High)</label>
+            <input type="number" class="form-input" id="m2-cfg-gpu" min="1" max="10" value="3">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m2-cfg-storage">Storage (512G, 1T, 2T)</label>
+            <input type="number" class="form-input" id="m2-cfg-storage" min="1" max="10" value="3">
+          </div>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-label">Total Valid Computer Builds:</div>
+          <div class="result-value-big" id="m2-cfg-res">108</div>
+          <div class="step-trace-container" id="m2-cfg-trace"></div>
+        </div>
+      </div>
+
+      <!-- Edge Case & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>0 choices at stage k:</span> <span class="edge-case-val">Total product = 0 (Pipeline impossible)</span></div>
+          <div class="edge-case-item"><span>Empty alternative set:</span> <span class="edge-case-val">Sum = remaining alternatives</span></div>
+          <div class="edge-case-item"><span>Single choice each:</span> <span class="edge-case-val">Product = 1 × 1 × ... = 1</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Use the Addition Rule when choices represent "OR" (mutually exclusive alternatives). Use the Multiplication Rule when choices represent "AND" (consecutive stages of a single compound action).
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 3 - Permutations With and Without Repetition
+         ======================================================================= -->
+    <section class="page-view" id="view-module3" data-page-title="Module 3: Permutations With and Without Repetition">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 3 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Permutations With and Without Repetition</h2>
+        <p class="module-subtitle">
+          Permutations model ordered sequences. This module cleanly distinguishes the three fundamental cases: selections without replacement, unrestricted repetition, and identical repeated elements.
+        </p>
+      </div>
+
+      <div class="grid-3col">
+        <div class="card">
+          <div class="card-title">Case 1: No Repetition (nPr)</div>
+          <div class="formula-box">
+            <span class="formula-notation">P(n, r) = n! / (n - r)!</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary);">
+            Selecting r distinct items from n objects in order. If r = n, P(n, n) = n! (all arrangements).
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Case 2: Repetition Allowed</div>
+          <div class="formula-box">
+            <span class="formula-notation">Sequences = n^r</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary);">
+            Each of r positions has n available choices (e.g. 4-digit ATM PIN = 10⁴ = 10,000).
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Case 3: Repeated Elements</div>
+          <div class="formula-box">
+            <span class="formula-notation">n! / (n₁! · n₂! · ... · n_k!)</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary);">
+            Arranging objects with indistinguishable duplicates (multinomial coefficient, e.g. anagrams).
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 3A: nPr and n^r Calculator -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Permutations Calculator</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Exact BigInt factorials and permutation evaluation</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m3-n').value='5'; document.getElementById('m3-r').value='3'; calculatePermutations();">P(5, 3)</button>
+            <button class="action-btn" onclick="document.getElementById('m3-n').value='7'; document.getElementById('m3-r').value='7'; calculatePermutations();">7! Distinct</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m3-n').value='10'; document.getElementById('m3-r').value='4'; calculatePermutations();">P(10, 4)</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m3-n">Total Objects (n)</label>
+            <input type="number" class="form-input" id="m3-n" min="0" max="60" value="6">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m3-r">Positions / Selected (r)</label>
+            <input type="number" class="form-input" id="m3-r" min="0" max="60" value="3">
+          </div>
+          <button class="action-btn btn-primary" id="m3-calc-btn">Calculate</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">No Repetition: P(n, r)</div>
+              <div class="result-value-big" id="m3-res-npr">120</div>
+            </div>
+            <div>
+              <div class="result-label">All Arrangements: n!</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-indigo);" id="m3-res-distinct">720</div>
+            </div>
+            <div>
+              <div class="result-label">Repetition Allowed: n^r</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-purple);" id="m3-res-rep">216</div>
+            </div>
+          </div>
+          <div class="step-trace-container" id="m3-trace-box"></div>
+        </div>
+      </div>
+
+      <!-- Workbench 3B: Multinomial Permutation & Anagram Analyzer -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Multinomial Repeated-Element Anagram Analyzer</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Computes n! / (n₁! · n₂! · ... · n_k!) with automatic character frequency extraction</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m3-word-input').value='ALGORITHM'; calculateWordPermutations();">"ALGORITHM"</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m3-word-input').value='MISSISSIPPI'; calculateWordPermutations();">"MISSISSIPPI"</button>
+            <button class="action-btn" onclick="document.getElementById('m3-word-input').value='DATABASE'; calculateWordPermutations();">"DATABASE"</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="flex:2;">
+            <label class="form-label" for="m3-word-input">Enter Word or Bitstring (e.g. 000111)</label>
+            <input type="text" class="form-input" id="m3-word-input" value="MISSISSIPPI">
+          </div>
+          <button class="action-btn btn-primary" id="m3-word-btn">Analyze Anagrams</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div style="margin-bottom:0.75rem;">
+            <span class="result-label">Detected Character Frequencies:</span>
+            <div id="m3-word-freq" style="margin-top:0.35rem;"></div>
+          </div>
+          <div class="result-label">Total Unique Permutations:</div>
+          <div class="result-value-big" id="m3-word-res">34,650</div>
+          <div class="step-trace-container" id="m3-word-trace"></div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>0! Base Case:</span> <span class="edge-case-val">0! = 1</span></div>
+          <div class="edge-case-item"><span>r = 0:</span> <span class="edge-case-val">P(n, 0) = n! / n! = 1</span></div>
+          <div class="edge-case-item"><span>r &gt; n (No rep):</span> <span class="edge-case-val">P(n, r) = 0</span></div>
+          <div class="edge-case-item"><span>All distinct chars:</span> <span class="edge-case-val">Multinomial reduces to n!</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Permutations treat order as essential. When duplicate objects exist, division by their individual factorials eliminates identical duplicate permutations.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 4 - Combinations and Related Identities
+         ======================================================================= -->
+    <section class="page-view" id="view-module4" data-page-title="Module 4: Combinations and Related Identities">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 4 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Combinations and Related Identities</h2>
+        <p class="module-subtitle">
+          Combinations count unordered subsets. This module implements the combination formula nCr, verifies Pascal's and Symmetry identities, and visualizes Pascal's Triangle with clickable cell inspection.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Combination Definition & Formula</div>
+          <div class="formula-box">
+            <span class="formula-notation">C(n, r) = (n r) = n! / [r! · (n - r)!]</span>
+            <span class="formula-tag">nCr</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            Because order is disregarded, each combination of r items corresponds to r! distinct permutations. Hence: <strong>C(n, r) = P(n, r) / r!</strong>.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Fundamental Combinatorial Identities</div>
+          <div class="formula-box">
+            <span class="formula-notation">Pascal: C(n, r) = C(n-1, r-1) + C(n-1, r)</span>
+            <span class="formula-tag">Recurrence</span>
+          </div>
+          <div class="formula-box">
+            <span class="formula-notation">Symmetry: C(n, r) = C(n, n - r)</span>
+            <span class="formula-tag">Complement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workbench 4: Combinations & Identities -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Combination & Identity Verifier</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Examine why order matters in permutations but not combinations</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m4-n').value='6'; document.getElementById('m4-r').value='2'; calculateCombinations();">C(6, 2)</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m4-n').value='10'; document.getElementById('m4-r').value='4'; calculateCombinations();">C(10, 4) Replica Nodes</button>
+            <button class="action-btn" onclick="document.getElementById('m4-n').value='8'; document.getElementById('m4-r').value='8'; calculateCombinations();">C(8, 8) = 1</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m4-n">Total Items (n)</label>
+            <input type="number" class="form-input" id="m4-n" min="0" max="60" value="6">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m4-r">Subset Size (r)</label>
+            <input type="number" class="form-input" id="m4-r" min="0" max="60" value="2">
+          </div>
+          <button class="action-btn btn-primary" id="m4-calc-btn">Compute & Verify</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Unordered Combinations C(n, r)</div>
+              <div class="result-value-big" id="m4-res-ncr">15</div>
+            </div>
+            <div>
+              <div class="result-label">Ordered Permutations P(n, r)</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-blue);" id="m4-res-npr">30</div>
+            </div>
+            <div>
+              <div class="result-label">Order Factor (r!)</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-amber);" id="m4-res-factor">2</div>
+            </div>
+          </div>
+
+          <div class="step-trace-container" id="m4-trace-box"></div>
+          <div class="step-trace-container" id="m4-identity-box" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+
+      <!-- Interactive Pascal's Triangle Pyramid -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Pascal's Triangle Generator</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Click any cell to highlight the two parent cells that sum up to it</div>
+          </div>
+          <div class="form-row" style="margin-bottom:0;">
+            <div class="form-group" style="min-width:120px;">
+              <label class="form-label" for="m4-pascal-rows">Rows (0 to 12)</label>
+              <input type="number" class="form-input" id="m4-pascal-rows" min="0" max="12" value="7">
+            </div>
+            <button class="action-btn btn-primary" id="m4-pascal-btn">Generate</button>
+          </div>
+        </div>
+
+        <div class="pascal-triangle-view" id="m4-pascal-container"></div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>C(n, 0):</span> <span class="edge-case-val">C(n, 0) = 1 (Empty subset)</span></div>
+          <div class="edge-case-item"><span>C(n, n):</span> <span class="edge-case-val">C(n, n) = 1 (Full set)</span></div>
+          <div class="edge-case-item"><span>C(n, 1):</span> <span class="edge-case-val">C(n, 1) = n</span></div>
+          <div class="edge-case-item"><span>r &gt; n:</span> <span class="edge-case-val">C(n, r) = 0</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Combinations discard ordering. Choosing 3 cluster nodes out of 10 available servers to host replicated microservices is an unordered combination C(10, 3) = 120, because the replica set {A, B, C} is identical regardless of selection sequence.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 5 - Binomial Theorem and Pascal's Triangle
+         ======================================================================= -->
+    <section class="page-view" id="view-module5" data-page-title="Module 5: Binomial Theorem and Pascal's Triangle">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 5 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Binomial Theorem and Pascal's Triangle</h2>
+        <p class="module-subtitle">
+          The Binomial Theorem expresses the algebraic expansion of powers of a binomial (a + b)^n. Its coefficients are the combinatorial combinations C(n, k), matching the rows of Pascal's Triangle.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Binomial Expansion Theorem</div>
+          <div class="formula-box">
+            <span class="formula-notation">(a + b)^n = ∑_{k=0}^n C(n, k) · a^(n-k) · b^k</span>
+            <span class="formula-tag">Theorem</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            Every term C(n, k) a^(n-k) b^k corresponds to choosing b from k of the n factors, and choosing a from the remaining n-k factors.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Computing & Information Theory Connection</div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            <strong>Bernoulli Trials & Error Detection:</strong> When transmitting n data bits over a noisy network channel with error probability p, the probability of exactly k bit errors is given directly by the binomial term: <strong>C(n, k) p^k (1 - p)^(n-k)</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 5: Interactive Binomial Expansion -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Binomial Expansion Workbench</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Calculates symbolic and numeric terms with exact equivalence verification</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m5-a').value='1'; document.getElementById('m5-b').value='1'; document.getElementById('m5-n').value='4'; calculateBinomial();">(1 + 1)⁴ = 2⁴</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m5-a').value='2'; document.getElementById('m5-b').value='3'; document.getElementById('m5-n').value='5'; calculateBinomial();">(2 + 3)⁵ = 5⁵</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m5-a">Value / Coeff of a</label>
+            <input type="number" class="form-input" id="m5-a" value="1" step="any">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m5-b">Value / Coeff of b</label>
+            <input type="number" class="form-input" id="m5-b" value="1" step="any">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m5-n">Non-negative Integer Power n (0-15)</label>
+            <input type="number" class="form-input" id="m5-n" min="0" max="15" value="4">
+          </div>
+          <button class="action-btn btn-primary" id="m5-calc-btn">Expand & Verify</button>
+        </div>
+
+        <!-- Symbolic Expansion Card -->
+        <div class="formula-box" id="m5-symbolic-display" style="margin:1rem 0;"></div>
+
+        <!-- Terms Table -->
+        <div style="overflow-x:auto;">
+          <table class="formula-table">
+            <thead>
+              <tr>
+                <th>Index (k)</th>
+                <th>Binomial Coeff C(n, k)</th>
+                <th>Factor a^(n-k)</th>
+                <th>Factor b^k</th>
+                <th>Term Value</th>
+              </tr>
+            </thead>
+            <tbody id="m5-terms-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- Verification Panel -->
+        <div class="result-display-panel" style="margin-top:1.25rem;">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Sum of Expansion Terms (∑ T_k)</div>
+              <div class="result-value-big" id="m5-verify-sum">16</div>
+            </div>
+            <div>
+              <div class="result-label">Direct Power Evaluation: (a + b)^n</div>
+              <div style="font-family:var(--font-mono); font-size:1.85rem; font-weight:800; color:var(--accent-blue);" id="m5-verify-power">16</div>
+            </div>
+          </div>
+          <div id="m5-verify-status" style="margin-top:0.5rem;"></div>
+          <div class="step-trace-container" id="m5-trace-box" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>n = 0:</span> <span class="edge-case-val">(a + b)⁰ = 1</span></div>
+          <div class="edge-case-item"><span>a = 1, b = 1:</span> <span class="edge-case-val">∑ C(n, k) = 2ⁿ (Total subsets)</span></div>
+          <div class="edge-case-item"><span>a = 1, b = -1:</span> <span class="edge-case-val">∑ (-1)ᵏ C(n, k) = 0</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Setting a = 1 and b = 1 yields the fundamental combinatorial identity ∑ C(n, k) = 2ⁿ, proving that a set with n elements has exactly 2ⁿ total subsets (its power set size).
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 6 - Pigeonhole Principle — Basic and Generalized
+         ======================================================================= -->
+    <section class="page-view" id="view-module6" data-page-title="Module 6: Pigeonhole Principle">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 6 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Pigeonhole Principle — Basic and Generalized</h2>
+        <p class="module-subtitle">
+          If N objects are distributed among k boxes, the basic principle guarantees at least one box contains ≥ 2 items when N &gt; k. The generalized principle guarantees at least one box contains at least ceil(N/k) items.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Mathematical Principles</div>
+          <div class="formula-box">
+            <span class="formula-notation">Basic: If N &gt; k, ∃ box with ≥ 2 items</span>
+            <span class="formula-tag">Basic</span>
+          </div>
+          <div class="formula-box">
+            <span class="formula-notation">Generalized: At least one box has ≥ ⌈N / k⌉ items</span>
+            <span class="formula-tag">Generalized</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-top:0.5rem;">
+            <strong>Proof by Contradiction:</strong> If every box had at most ⌈N/k⌉ - 1 items, total items would be at most k(⌈N/k⌉ - 1) &lt; k(N/k) = N, which is a contradiction.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Computer Science Connection: Hash Collisions</div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            In hash tables, when hashing N keys into a table with k buckets, once <strong>N &gt; k</strong>, hash collisions are mathematically <em>guaranteed</em> by the Pigeonhole Principle. This proves why collision-resolution mechanisms (chaining, open addressing) are mandatory in computer systems.
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 6A: Balls and Boxes Simulator -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Balls-and-Boxes / Bucket Simulator</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Distribute N items into k boxes and verify the guaranteed ⌈N/k⌉ ceiling</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m6-n').value='5'; document.getElementById('m6-k').value='4'; runPigeonholeSimulation();">5 into 4</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m6-n').value='25'; document.getElementById('m6-k').value='6'; runPigeonholeSimulation();">25 into 6 (⌈25/6⌉ = 5)</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m6-n">Number of Objects (N)</label>
+            <input type="number" class="form-input" id="m6-n" min="0" max="100" value="10">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m6-k">Number of Boxes / Buckets (k)</label>
+            <input type="number" class="form-input" id="m6-k" min="1" max="16" value="4">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m6-dist-type">Distribution Strategy</label>
+            <select class="form-select" id="m6-dist-type">
+              <option value="random">Random Drop (Monte Carlo)</option>
+              <option value="uniform">Uniform Round-Robin</option>
+              <option value="worst">Worst Case (Biased to 1st)</option>
+            </select>
+          </div>
+          <button class="action-btn btn-primary" id="m6-sim-btn">Distribute & Simulate</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Guaranteed Minimum in at least 1 Box ⌈N / k⌉</div>
+              <div class="result-value-big" id="m6-res-ceil">3</div>
+            </div>
+            <div>
+              <div class="result-label">Basic Principle Collision Status</div>
+              <div style="font-family:var(--font-mono); font-size:1.3rem; color:var(--accent-emerald);" id="m6-res-basic">Guaranteed (N &gt; k)</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Visual Box Grid -->
+          <div class="balls-boxes-grid" id="m6-boxes-container"></div>
+          <div class="step-trace-container" id="m6-trace-box"></div>
+        </div>
+      </div>
+
+      <!-- Workbench 6B: Hash Table Collision Demonstration -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Hash Table Collision Demonstration</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Demonstrates hash function slot collisions and load factor α = N/k</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m6-hash-buckets">Hash Table Size (Buckets k)</label>
+            <input type="number" class="form-input" id="m6-hash-buckets" min="2" max="12" value="5">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m6-hash-func">Hash Algorithm</label>
+            <select class="form-select" id="m6-hash-func">
+              <option value="sum" selected>ASCII Sum Modulo: ∑ charCode % k</option>
+              <option value="djb2">DJB2 Hash % k</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex:2;">
+            <label class="form-label" for="m6-hash-newkey">Insert New Key String</label>
+            <input type="text" class="form-input" id="m6-hash-newkey" placeholder="e.g. helen, ivan, julia...">
+          </div>
+          <button class="action-btn btn-primary" id="m6-hash-addbtn">Insert Key</button>
+          <button class="action-btn" id="m6-hash-resetbtn">Reset Keys</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Table Load Factor α = N / k</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-cyan);" id="m6-hash-alpha">1.40</div>
+            </div>
+            <div>
+              <div class="result-label">Total Colliding Items</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-rose);" id="m6-hash-collisions">2</div>
+            </div>
+          </div>
+
+          <table class="hash-table-display">
+            <thead>
+              <tr>
+                <th>Bucket Index</th>
+                <th>Keys Stored in Chain</th>
+                <th>Count</th>
+                <th>Collision Status</th>
+              </tr>
+            </thead>
+            <tbody id="m6-hash-tbody"></tbody>
+          </table>
+
+          <div id="m6-hash-expl" style="margin-top:1rem; font-size:0.85rem; color:var(--text-secondary);"></div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>N &lt; k:</span> <span class="edge-case-val">⌈N/k⌉ = 1 (Collision NOT guaranteed)</span></div>
+          <div class="edge-case-item"><span>N = k:</span> <span class="edge-case-val">⌈k/k⌉ = 1 (Can have 1 in each)</span></div>
+          <div class="edge-case-item"><span>N = k + 1:</span> <span class="edge-case-val">At least one box has ≥ 2 (Guaranteed)</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> The Pigeonhole Principle provides definitive lower bounds without needing to know the exact placement mechanism. In algorithm design, it establishes lossy compression limits and hash collision bounds.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 7 - Inclusion–Exclusion Principle
+         ======================================================================= -->
+    <section class="page-view" id="view-module7" data-page-title="Module 7: Inclusion–Exclusion Principle">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 7 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Inclusion–Exclusion Principle</h2>
+        <p class="module-subtitle">
+          When sets overlap, adding their individual cardinalities overcounts elements in multiple sets. The Principle of Inclusion–Exclusion systematically corrects this by alternating between subtraction and addition.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Mathematical Formulas</div>
+          <div class="formula-box">
+            <span class="formula-notation">2-Set: |A ∪ B| = |A| + |B| - |A ∩ B|</span>
+          </div>
+          <div class="formula-box">
+            <span class="formula-notation">3-Set: |A ∪ B ∪ C| = ∑|A| - ∑|A ∩ B| + |A ∩ B ∩ C|</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Computer Science Context</div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            <strong>Database Query Filters:</strong> When executing SQL queries like <code>WHERE lang = 'Python' OR lang = 'Java' OR lang = 'C++'</code>, query optimizers use Inclusion–Exclusion to estimate the cardinality of the resulting result set for execution plan costing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 7: Inclusion-Exclusion Calculator & Venn Diagram -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Inclusion–Exclusion Workbench</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Validates constraint consistency and draws a dynamic SVG Venn diagram</div>
+          </div>
+          <div class="form-group" style="max-width:180px;">
+            <label class="form-label" for="m7-mode-select">Select Set Mode</label>
+            <select class="form-select" id="m7-mode-select">
+              <option value="3" selected>3 Sets (A, B, C)</option>
+              <option value="2">2 Sets (A, B)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 2-Set Inputs Panel -->
+        <div id="m7-panel-2set" style="display:none;">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="m7-2-a">|A| (Python)</label>
+              <input type="number" class="form-input" id="m7-2-a" min="0" value="50">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m7-2-b">|B| (Java)</label>
+              <input type="number" class="form-input" id="m7-2-b" min="0" value="40">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m7-2-ab">|A ∩ B| (Both)</label>
+              <input type="number" class="form-input" id="m7-2-ab" min="0" value="15">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3-Set Inputs Panel -->
+        <div id="m7-panel-3set">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="m7-3-a">|A| (Python)</label>
+              <input type="number" class="form-input" id="m7-3-a" min="0" value="60">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m7-3-b">|B| (Java)</label>
+              <input type="number" class="form-input" id="m7-3-b" min="0" value="50">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m7-3-c">|C| (C++)</label>
+              <input type="number" class="form-input" id="m7-3-c" min="0" value="45">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="m7-3-ab">|A ∩ B|</label>
+              <input type="number" class="form-input" id="m7-3-ab" min="0" value="20">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m7-3-bc">|B ∩ C|</label>
+              <input type="number" class="form-input" id="m7-3-bc" min="0" value="15">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m7-3-ac">|A ∩ C|</label>
+              <input type="number" class="form-input" id="m7-3-ac" min="0" value="18">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m7-3-abc">|A ∩ B ∩ C| (All 3)</label>
+              <input type="number" class="form-input" id="m7-3-abc" min="0" value="8">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2col" style="margin-top:1.25rem;">
+          <!-- Result & Trace -->
+          <div class="result-display-panel">
+            <div class="result-label">Union Cardinality (|A ∪ B ∪ C|)</div>
+            <div class="result-value-big" id="m7-res-union">110</div>
+            <div class="step-trace-container" id="m7-trace-box"></div>
+          </div>
+
+          <!-- Dynamic SVG Venn Diagram -->
+          <div style="display:flex; justify-content:center; align-items:center; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-color); padding:1rem;">
+            <svg class="venn-svg" id="m7-venn-svg" viewBox="0 0 460 330"></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>Disjoint Sets:</span> <span class="edge-case-val">Intersections = 0; Reduces to Sum Rule</span></div>
+          <div class="edge-case-item"><span>Subset A ⊆ B:</span> <span class="edge-case-val">|A ∩ B| = |A|; |A ∪ B| = |B|</span></div>
+          <div class="edge-case-item"><span>Constraint Checker:</span> <span class="edge-case-val">Catches negative sub-regions</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> The alternating sign nature of the Inclusion–Exclusion formula (+ singletons, - pairs, + triples, - quadruples...) ensures that each element in the union is counted exactly once.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 8 - Derangements and Applications
+         ======================================================================= -->
+    <section class="page-view" id="view-module8" data-page-title="Module 8: Derangements and Applications">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 8 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Derangements and Applications</h2>
+        <p class="module-subtitle">
+          A derangement is a permutation with zero fixed points: no object appears in its original position (π(i) ≠ i for all i). This module models the subfactorial recurrence D(n), its probability convergence to 1/e, and simulates real-world letter/worker reassignments.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Recurrence Relation & Base Cases</div>
+          <div class="formula-box">
+            <span class="formula-notation">D(n) = (n - 1) · [D(n-1) + D(n-2)]</span>
+            <span class="formula-tag">Recurrence</span>
+          </div>
+          <div class="formula-box">
+            <span class="formula-notation">D(0) = 1,  D(1) = 0</span>
+            <span class="formula-tag">Initial Conditions</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Euler's Limit (1/e) & Computing Applications</div>
+          <div class="formula-box">
+            <span class="formula-notation">lim_{n→∞} D(n) / n! = 1/e ≈ 0.367879...</span>
+            <span class="formula-tag">Limit</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            <strong>Cryptography:</strong> Cryptographic S-Boxes require derangements to guarantee that no plaintext byte ever maps to itself. Also used in peer code reviews and randomized test harness generation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 8A: Derangements Calculator -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Derangements Calculator</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Exact BigInt calculation of D(n), total n!, and exact probability D(n)/n!</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m8-n').value='1'; calculateDerangements();">D(1) = 0</button>
+            <button class="action-btn" onclick="document.getElementById('m8-n').value='4'; calculateDerangements();">D(4) = 9</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m8-n').value='7'; calculateDerangements();">D(7) = 1,854</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m8-n">Number of Elements (n, 0-25)</label>
+            <input type="number" class="form-input" id="m8-n" min="0" max="25" value="4">
+          </div>
+          <button class="action-btn btn-primary" id="m8-calc-btn">Compute Derangements</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Derangements Count D(n)</div>
+              <div class="result-value-big" id="m8-res-dn">9</div>
+            </div>
+            <div>
+              <div class="result-label">Total Permutations n!</div>
+              <div style="font-family:var(--font-mono); font-size:1.6rem; color:var(--accent-blue);" id="m8-res-fact">24</div>
+            </div>
+            <div>
+              <div class="result-label">Probability P(n) = D(n) / n!</div>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; color:var(--accent-emerald);" id="m8-res-prob">37.5000% (P ≈ 0.375000)</div>
+            </div>
+          </div>
+
+          <div class="step-trace-container" id="m8-trace-box"></div>
+
+          <!-- Sequence Table -->
+          <div style="margin-top:1.25rem;">
+            <div class="result-label">Derangement Progression Table (D(0) to D(n)):</div>
+            <table class="formula-table" style="margin-top:0.5rem;">
+              <thead>
+                <tr>
+                  <th>n</th>
+                  <th>Derangements D(n)</th>
+                  <th>Total n!</th>
+                  <th>Probability (%)</th>
+                </tr>
+              </thead>
+              <tbody id="m8-sequence-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workbench 8B: Monte Carlo Letter & Envelope Simulation -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Monte Carlo Task / Envelope Assignment Simulator</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Randomly shuffles letters into envelopes to test empirical derangement rate</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m8-sim-n">Items / Envelopes (n)</label>
+            <input type="number" class="form-input" id="m8-sim-n" min="2" max="8" value="4">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m8-sim-trials">Monte Carlo Trials</label>
+            <select class="form-select" id="m8-sim-trials">
+              <option value="500">500 Trials</option>
+              <option value="1000" selected>1,000 Trials</option>
+              <option value="5000">5,000 Trials</option>
+            </select>
+          </div>
+          <button class="action-btn btn-primary" id="m8-sim-btn">Run Monte Carlo Trials</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Empirical Derangements Observed</div>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; color:var(--accent-blue);" id="m8-sim-res-count">-</div>
+            </div>
+            <div>
+              <div class="result-label">Observed Rate vs Theoretical 1/e</div>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; color:var(--accent-emerald);" id="m8-sim-res-rate">-</div>
+            </div>
+          </div>
+
+          <div style="margin-top:0.75rem;">
+            <div class="result-label" style="margin-bottom:0.4rem;">Exhaustive Permutations Listing (Derangements with ✓):</div>
+            <div class="item-list-grid" id="m8-perm-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>D(0) = 1:</span> <span class="edge-case-val">Vacuous truth (0 items, 0 fixed points)</span></div>
+          <div class="edge-case-item"><span>D(1) = 0:</span> <span class="edge-case-val">Single item MUST go to its own position</span></div>
+          <div class="edge-case-item"><span>D(2) = 1:</span> <span class="edge-case-val">Only swap (2, 1) is a derangement</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Derangement probability stabilizes astonishingly fast: for n ≥ 4, P(n) is already within 1% of 1/e ≈ 36.79%, showing that even as n grows huge, the chance of a random permutation having no fixed points remains constant!
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 9 - Counting With Repetition and Multisets
+         ======================================================================= -->
+    <section class="page-view" id="view-module9" data-page-title="Module 9: Multisets and Counting With Repetition">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 9 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Counting With Repetition and Multisets</h2>
+        <p class="module-subtitle">
+          Multisets allow repeated selections of items where order does not matter. The number of multisets of size r from n types is computed using the Stars and Bars theorem as C(n + r - 1, r).
+        </p>
+      </div>
+
+      <!-- The 4 Models Matrix -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-title">The Four Fundamental Models of Counting</div>
+        <table class="formula-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Order Relevant?</th>
+              <th>Repetition Allowed?</th>
+              <th>Mathematical Formula</th>
+              <th>Computing Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Permutations</strong></td>
+              <td>Yes</td>
+              <td>No</td>
+              <td class="formula-math-col">P(n, r) = n! / (n - r)!</td>
+              <td>Priority CPU process execution order</td>
+            </tr>
+            <tr>
+              <td><strong>Sequences / Tuples</strong></td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td class="formula-math-col">n^r</td>
+              <td>Fixed-length byte strings, passwords</td>
+            </tr>
+            <tr>
+              <td><strong>Combinations</strong></td>
+              <td>No</td>
+              <td>No</td>
+              <td class="formula-math-col">C(n, r) = n! / [r!(n - r)!]</td>
+              <td>Selecting replica server nodes</td>
+            </tr>
+            <tr style="background:rgba(56, 189, 248, 0.08);">
+              <td><strong>Multisets (Stars & Bars)</strong></td>
+              <td>No</td>
+              <td>Yes</td>
+              <td class="formula-math-col">C(n + r - 1, r)</td>
+              <td>Allocating identical tasks to threads</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Workbench 9: Multisets and Stars & Bars Visualizer -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Multiset & Stars and Bars Visualizer</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Visualize r stars (items) and n-1 bars (bin dividers)</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m9-n').value='3'; document.getElementById('m9-r').value='4'; calculateMultisets();">3 Types, 4 Items</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m9-n').value='4'; document.getElementById('m9-r').value='8'; calculateMultisets();">4 Types, 8 Items</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m9-n">Number of Distinct Types / Bins (n)</label>
+            <input type="number" class="form-input" id="m9-n" min="1" max="15" value="3">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m9-r">Number of Items to Select (r)</label>
+            <input type="number" class="form-input" id="m9-r" min="0" max="30" value="4">
+          </div>
+          <button class="action-btn btn-primary" id="m9-calc-btn">Compute Comparison</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Unordered Multisets C(n + r - 1, r)</div>
+              <div class="result-value-big" id="m9-res-multiset">15</div>
+            </div>
+            <div>
+              <div class="result-label">Ordered Sequences n^r</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-indigo);" id="m9-res-sequence">81</div>
+            </div>
+            <div>
+              <div class="result-label">No Repetition C(n, r)</div>
+              <div style="font-family:var(--font-mono); font-size:1.5rem; color:var(--accent-amber);" id="m9-res-norep">0</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Stars and Bars Visualizer -->
+          <div id="m9-stars-bars" style="margin:1rem 0;"></div>
+          <div class="step-trace-container" id="m9-trace-box"></div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>r = 0 items:</span> <span class="edge-case-val">C(n-1, 0) = 1 (Empty multiset)</span></div>
+          <div class="edge-case-item"><span>n = 1 type:</span> <span class="edge-case-val">C(r, r) = 1 (All items must be type 1)</span></div>
+          <div class="edge-case-item"><span>r &gt; n:</span> <span class="edge-case-val">Valid for multisets (unlike C(n, r))</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> The Stars and Bars representation transforms the problem of distributing r identical items into n distinct bins into choosing positions for n - 1 divider bars among r + n - 1 total slots.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 10 - Integer Partitions and Compositions
+         ======================================================================= -->
+    <section class="page-view" id="view-module10" data-page-title="Module 10: Partitions and Compositions">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 10 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Integer Partitions and Compositions</h2>
+        <p class="module-subtitle">
+          An integer partition represents a positive integer n as a sum of positive integers where order is irrelevant. An integer composition represents n as an ordered sequence of positive integers.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Integer Partition p(n) (Order Irrelevant)</div>
+          <div class="formula-box">
+            <span class="formula-notation">Euler DP: p(n, k) = p(n - k, k) + p(n, k - 1)</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            For example, 4 has 5 partitions: 4, 3+1, 2+2, 2+1+1, 1+1+1+1. Order does NOT matter.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Integer Composition c(n) (Order Significant)</div>
+          <div class="formula-box">
+            <span class="formula-notation">c(n) = 2^(n - 1)  (for n ≥ 1)</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            For example, 4 has 2^(4-1) = 8 compositions: 4, 3+1, 1+3, 2+2, 2+1+1, 1+2+1, 1+1+2, 1+1+1+1. Order DOES matter.
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 10: Partition & Composition Generator -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Partition & Composition Explorer</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Generates exact counts, listings, and clickable Ferrers / Young diagrams</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m10-n').value='4'; calculatePartitionsAndCompositions();">n = 4 (p=5, c=8)</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m10-n').value='6'; calculatePartitionsAndCompositions();">n = 6 (p=11, c=32)</button>
+            <button class="action-btn" onclick="document.getElementById('m10-n').value='8'; calculatePartitionsAndCompositions();">n = 8 (p=22, c=128)</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m10-n">Positive Integer (n, 1 to 40)</label>
+            <input type="number" class="form-input" id="m10-n" min="1" max="40" value="5">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m10-max-display">Max Items to Generate</label>
+            <input type="number" class="form-input" id="m10-max-display" min="10" max="100" value="50">
+          </div>
+          <button class="action-btn btn-primary" id="m10-calc-btn">Compute Partitions</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Integer Partition Count p(n)</div>
+              <div class="result-value-big" id="m10-res-part-count">7</div>
+            </div>
+            <div>
+              <div class="result-label">Integer Composition Count c(n) = 2^(n-1)</div>
+              <div style="font-family:var(--font-mono); font-size:1.6rem; color:var(--accent-purple);" id="m10-res-comp-count">16</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Ferrers Diagram Display -->
+          <div id="m10-ferrers-box" style="margin:1rem 0;"></div>
+
+          <div class="grid-2col" style="margin-top:1rem;">
+            <div>
+              <div class="result-label" style="margin-bottom:0.4rem;">Partitions (Click to inspect Ferrers diagram):</div>
+              <div class="item-list-grid" id="m10-partitions-list"></div>
+            </div>
+            <div>
+              <div class="result-label" style="margin-bottom:0.4rem;">Compositions (Order Matters):</div>
+              <div class="item-list-grid" id="m10-compositions-list"></div>
+            </div>
+          </div>
+
+          <div class="step-trace-container" id="m10-trace-box"></div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>n = 1:</span> <span class="edge-case-val">p(1) = 1, c(1) = 2⁰ = 1</span></div>
+          <div class="edge-case-item"><span>n = 2:</span> <span class="edge-case-val">p(2) = 2, c(2) = 2</span></div>
+          <div class="edge-case-item"><span>Large n protection:</span> <span class="edge-case-val">DP table computes p(n) without recursion limits</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> In operating systems and distributed systems, dividing an integer workload of size n among unspecified worker nodes is an integer partition, while assigning tasks to an ordered execution pipeline is an integer composition.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 11 - Recurrence Relations and Their Solutions
+         ======================================================================= -->
+    <section class="page-view" id="view-module11" data-page-title="Module 11: Recurrence Relations">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 11 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Recurrence Relations and Their Solutions</h2>
+        <p class="module-subtitle">
+          Recurrence relations express the n-th term of a sequence recursively in terms of preceding terms. They form the mathematical backbone of algorithm runtime analysis, divide-and-conquer recurrences, and dynamic programming.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Supported Recurrence Templates</div>
+          <ul style="padding-left:1.2rem; font-size:0.85rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.4rem;">
+            <li><strong>Fibonacci:</strong> F(n) = F(n-1) + F(n-2); F(0)=0, F(1)=1. Closed form: Binet's formula.</li>
+            <li><strong>Tower of Hanoi:</strong> T(n) = 2T(n-1) + 1; T(1)=1. Closed form: T(n) = 2ⁿ - 1.</li>
+            <li><strong>Divide-and-Conquer (Merge Sort):</strong> T(n) = 2T(n/2) + n. Closed form: Θ(n log n).</li>
+            <li><strong>Arithmetic & Geometric:</strong> a(n) = a(n-1) + d; g(n) = r · g(n-1).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Iterative DP vs Naive Recursion</div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            Naive recursive algorithms recalculate identical subproblems exponentially. Dynamic programming caches subproblem solutions in linear time O(n), demonstrating why recurrence relation analysis is essential for MCA students.
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 11: Recurrence Sequence Generator -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Recurrence Generator & Step Counter</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Compare iterative memory steps vs naive recursive activation calls</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="flex:2;">
+            <label class="form-label" for="m11-template">Select Recurrence Template</label>
+            <select class="form-select" id="m11-template">
+              <option value="fibonacci" selected>Fibonacci: F(n) = F(n-1) + F(n-2)</option>
+              <option value="hanoi">Tower of Hanoi: T(n) = 2T(n-1) + 1</option>
+              <option value="mergesort">Merge Sort (D&C): T(n) = 2T(n/2) + n</option>
+              <option value="arithmetic">Arithmetic: a(n) = a(n-1) + 3</option>
+              <option value="geometric">Geometric: g(n) = 2 · g(n-1)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m11-n">Term Index n (0 to 30)</label>
+            <input type="number" class="form-input" id="m11-n" min="0" max="30" value="10">
+          </div>
+          <button class="action-btn btn-primary" id="m11-calc-btn">Generate & Analyze</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">n-th Term Value</div>
+              <div class="result-value-big" id="m11-res-nth">55</div>
+            </div>
+            <div>
+              <div class="result-label">Asymptotic Time Complexity</div>
+              <div style="font-family:var(--font-mono); font-size:1.3rem; color:var(--accent-emerald);" id="m11-res-complexity">O(n)</div>
+            </div>
+          </div>
+
+          <div class="grid-2col" style="margin:1rem 0;">
+            <div class="card" style="padding:1rem;">
+              <div class="result-label">Dynamic Programming / Iterative Steps:</div>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; color:var(--accent-blue);" id="m11-res-iter-steps">9 operations</div>
+            </div>
+            <div class="card" style="padding:1rem;">
+              <div class="result-label">Naive Recursive Calls:</div>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; color:var(--accent-rose);" id="m11-res-rec-calls">177 calls</div>
+            </div>
+          </div>
+
+          <!-- Sequence Table -->
+          <table class="formula-table">
+            <thead>
+              <tr>
+                <th>Index (n)</th>
+                <th>Calculated Term Value</th>
+              </tr>
+            </thead>
+            <tbody id="m11-seq-tbody"></tbody>
+          </table>
+
+          <div class="step-trace-container" id="m11-trace-box" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>Base Case n = 0:</span> <span class="edge-case-val">F(0) = 0</span></div>
+          <div class="edge-case-item"><span>Base Case n = 1:</span> <span class="edge-case-val">F(1) = 1</span></div>
+          <div class="edge-case-item"><span>Hanoi 1 Disk:</span> <span class="edge-case-val">2¹ - 1 = 1 move</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Recurrence relations define recursive computational costs. Deriving closed forms or applying the Master Theorem enables computer scientists to predict algorithm scalability without running long benchmarks.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: MODULE 12 - Generating Functions and Applications
+         ======================================================================= -->
+    <section class="page-view" id="view-module12" data-page-title="Module 12: Generating Functions">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">TOPIC 12 OF 12</span>
+          <span class="mca-badge">MCA Sem 1 • Unit 1</span>
+        </div>
+        <h2 class="module-title">Generating Functions and Applications</h2>
+        <p class="module-subtitle">
+          An Ordinary Generating Function (OGF) transforms a discrete sequence into the coefficients of a formal power series: G(x) = a₀ + a₁x + a₂x² + ... This module implements polynomial convolution and solves change-making target-sum counting problems.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Ordinary Generating Function Definition</div>
+          <div class="formula-box">
+            <span class="formula-notation">G(x) = ∑_{n=0}^∞ a_n · x^n = a₀ + a₁x + a₂x² + ...</span>
+            <span class="formula-tag">OGF</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            The coefficient [x^k] G(x) represents the k-th term of the sequence. Convolutions of generating functions represent combining independent resources.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Counting Integer Solutions & Coin Change</div>
+          <div class="formula-box">
+            <span class="formula-notation">Ways to make sum S = [x^S] ∏ 1 / (1 - x^c_i)</span>
+            <span class="formula-tag">Coin Change</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary);">
+            Using coin denominations [1, 2, 5], the generating series is (1 + x + x² + ...)(1 + x² + x⁴ + ...)(1 + x⁵ + x¹⁰ + ...). The coefficient of x^S gives the exact number of ways to form sum S!
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench 12A: Polynomial Multiplication (Convolution) -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Interactive Polynomial Convolution Engine</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Multiplies two finite generating functions A(x) and B(x) using Cauchy product</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m12-poly-a">Polynomial A Coeffs (a₀, a₁, a₂...)</label>
+            <input type="text" class="form-input" id="m12-poly-a" value="1, 2, 1" placeholder="e.g. 1, 2, 1 for 1 + 2x + x²">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m12-poly-b">Polynomial B Coeffs (b₀, b₁, b₂...)</label>
+            <input type="text" class="form-input" id="m12-poly-b" value="1, 1" placeholder="e.g. 1, 1 for 1 + x">
+          </div>
+          <button class="action-btn btn-primary" id="m12-poly-btn">Multiply Polynomials</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="result-label">Resulting Polynomial Product C(x) = A(x) · B(x):</div>
+          <div class="result-value-big" id="m12-poly-res" style="font-size:1.4rem;">1 + 3x + 3x^2 + x^3</div>
+          <div class="step-trace-container" id="m12-poly-trace"></div>
+        </div>
+      </div>
+
+      <!-- Workbench 12B: Target Sum / Coin Change via Generating Functions -->
+      <div class="card workbench-card">
+        <div class="workbench-header">
+          <div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--text-primary);">Coin Change Target-Sum Solver via Generating Functions</div>
+            <div style="font-size:0.82rem; color:var(--text-secondary);">Extracts coefficient [x^S] and verifies against dynamic programming</div>
+          </div>
+          <div class="workbench-actions">
+            <button class="action-btn" onclick="document.getElementById('m12-coins').value='1, 2, 5'; document.getElementById('m12-target').value='10'; calculateCoinChangeGeneratingFunction();">Target 10 with [1,2,5]</button>
+            <button class="action-btn btn-primary" onclick="document.getElementById('m12-coins').value='1, 2, 5'; document.getElementById('m12-target').value='12'; calculateCoinChangeGeneratingFunction();">Target 12 with [1,2,5]</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="m12-coins">Allowed Coin Denominations</label>
+            <input type="text" class="form-input" id="m12-coins" value="1, 2, 5" placeholder="e.g. 1, 2, 5">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m12-target">Target Sum S (0 to 50)</label>
+            <input type="number" class="form-input" id="m12-target" min="0" max="50" value="10">
+          </div>
+          <button class="action-btn btn-primary" id="m12-coin-btn">Extract Coefficient</button>
+        </div>
+
+        <div class="result-display-panel">
+          <div class="formula-box" id="m12-coin-formula" style="margin-bottom:1rem;">G(x) = (1 + x + x² + ...) · (1 + x² + x⁴ + ...) · (1 + x⁵ + x¹⁰ + ...)</div>
+          <div class="result-hero-row">
+            <div>
+              <div class="result-label">Ways to Make Sum S ([x^S] G(x))</div>
+              <div class="result-value-big" id="m12-coin-res">14</div>
+            </div>
+          </div>
+          <div id="m12-coin-verify"></div>
+          <div class="step-trace-container" id="m12-coin-trace" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+
+      <!-- Edge Cases & Learning Takeaway -->
+      <div class="edge-case-panel">
+        <div class="edge-case-title">Edge Cases Tested & Learning Takeaways</div>
+        <div class="edge-case-list">
+          <div class="edge-case-item"><span>Target S = 0:</span> <span class="edge-case-val">[x⁰] = 1 (Empty change)</span></div>
+          <div class="edge-case-item"><span>Degree bound:</span> <span class="edge-case-val">Truncated polynomials up to degree S</span></div>
+          <div class="edge-case-item"><span>DP Verification:</span> <span class="edge-case-val">Matches classic coin-change DP exactly</span></div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.75rem;">
+          <strong>Conclusion:</strong> Generating functions transform discrete counting problems into algebraic polynomial operations. Multiplying series automatically handles the addition of coin values in the exponents and sums the product combinations in the coefficients.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: QUIZ - Interactive MCA Assessment Examination
+         ======================================================================= -->
+    <section class="page-view" id="view-quiz" data-page-title="Interactive MCQ Examination">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">STUDENT ASSESSMENT</span>
+          <span class="mca-badge">12 Questions • 1 per Topic</span>
+        </div>
+        <h2 class="module-title">Combinatorics MCA Knowledge Assessment</h2>
+        <p class="module-subtitle">
+          Test your conceptual understanding across all 12 modules. Each question features 4 options, immediate color-coded feedback, and detailed mathematical explanations.
+        </p>
+      </div>
+
+      <div class="quiz-container">
+        <div id="quiz-questions-container"></div>
+
+        <!-- End of Quiz Score Summary Card -->
+        <div class="quiz-score-summary" id="quiz-summary-card" style="display:none;">
+          <h3 style="font-size:1.6rem; color:var(--accent-emerald); margin-bottom:0.5rem;">Assessment Completed!</h3>
+          <div style="font-size:1.1rem; color:var(--text-primary); margin-bottom:0.5rem;">Your Score: <strong id="quiz-score-val" style="color:var(--accent-cyan); font-size:1.5rem;">0 / 12</strong></div>
+          <div id="quiz-score-msg" style="margin-bottom:1.5rem;"></div>
+          <button class="action-btn btn-primary" id="quiz-retake-btn">Retake Quiz</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: FORMULAS - Formula Quick Reference Sheet
+         ======================================================================= -->
+    <section class="page-view" id="view-formulas" data-page-title="Formula Reference Sheet">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">REVISION COMPENDIUM</span>
+          <span class="mca-badge">Unit 1 Mathematical Formulas</span>
+        </div>
+        <h2 class="module-title">Combinatorics Formula Reference Sheet</h2>
+        <p class="module-subtitle">
+          Comprehensive, college-level reference sheet summarizing every mathematical formula, boundary conditions, and computing interpretation across Unit 1.
+        </p>
+      </div>
+
+      <div class="card">
+        <table class="formula-table">
+          <thead>
+            <tr>
+              <th>Topic</th>
+              <th>Formula</th>
+              <th>Conditions / Notes</th>
+              <th>Computing Application</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Addition Rule</strong></td>
+              <td class="formula-math-col">|A ∪ B| = |A| + |B|</td>
+              <td>A ∩ B = ∅ (Mutually Exclusive)</td>
+              <td>Disjoint authentication branches</td>
+            </tr>
+            <tr>
+              <td><strong>Multiplication Rule</strong></td>
+              <td class="formula-math-col">|A × B| = |A| × |B|</td>
+              <td>Independent sequential stages</td>
+              <td>Hardware configurations, key combinations</td>
+            </tr>
+            <tr>
+              <td><strong>Permutations (No Rep)</strong></td>
+              <td class="formula-math-col">P(n, r) = n! / (n - r)!</td>
+              <td>0 ≤ r ≤ n</td>
+              <td>Task prioritization, routing sequences</td>
+            </tr>
+            <tr>
+              <td><strong>Permutations (Repeated)</strong></td>
+              <td class="formula-math-col">n! / (n₁! · n₂! · ... · n_k!)</td>
+              <td>∑ n_i = n</td>
+              <td>Anagram generation, bitstring arrangements</td>
+            </tr>
+            <tr>
+              <td><strong>Combinations</strong></td>
+              <td class="formula-math-col">C(n, r) = n! / [r!(n - r)!]</td>
+              <td>Order does not matter</td>
+              <td>Replica server clustering, feature selection</td>
+            </tr>
+            <tr>
+              <td><strong>Pascal's Identity</strong></td>
+              <td class="formula-math-col">C(n, r) = C(n-1, r-1) + C(n-1, r)</td>
+              <td>1 ≤ r ≤ n</td>
+              <td>Pascal's Triangle construction</td>
+            </tr>
+            <tr>
+              <td><strong>Binomial Theorem</strong></td>
+              <td class="formula-math-col">(a + b)ⁿ = ∑ C(n, k) aⁿ⁻ᵏ bᵏ</td>
+              <td>n ≥ 0 integer</td>
+              <td>Error-correcting Hamming codes</td>
+            </tr>
+            <tr>
+              <td><strong>Generalized Pigeonhole</strong></td>
+              <td class="formula-math-col">Min in one box = ⌈N / k⌉</td>
+              <td>N items into k bins</td>
+              <td>Hash table collision bounds, load factors</td>
+            </tr>
+            <tr>
+              <td><strong>Inclusion–Exclusion</strong></td>
+              <td class="formula-math-col">|A ∪ B| = |A| + |B| - |A ∩ B|</td>
+              <td>Alternating sum for n sets</td>
+              <td>SQL query filter cardinality estimation</td>
+            </tr>
+            <tr>
+              <td><strong>Derangements</strong></td>
+              <td class="formula-math-col">D(n) = (n-1)[D(n-1) + D(n-2)]</td>
+              <td>D(0)=1, D(1)=0; lim D(n)/n! = 1/e</td>
+              <td>Cryptographic S-Boxes, permutation testing</td>
+            </tr>
+            <tr>
+              <td><strong>Multisets (Stars & Bars)</strong></td>
+              <td class="formula-math-col">C(n + r - 1, r)</td>
+              <td>r items from n types with rep</td>
+              <td>Parallel task allocation, memory blocks</td>
+            </tr>
+            <tr>
+              <td><strong>Integer Compositions</strong></td>
+              <td class="formula-math-col">c(n) = 2ⁿ⁻¹</td>
+              <td>Ordered parts; n ≥ 1</td>
+              <td>Instruction pipeline decomposition</td>
+            </tr>
+            <tr>
+              <td><strong>Integer Partitions</strong></td>
+              <td class="formula-math-col">p(n) via Euler DP</td>
+              <td>Unordered parts</td>
+              <td>Thread workload distribution</td>
+            </tr>
+            <tr>
+              <td><strong>Tower of Hanoi</strong></td>
+              <td class="formula-math-col">T(n) = 2T(n-1) + 1 = 2ⁿ - 1</td>
+              <td>T(1) = 1; O(2ⁿ)</td>
+              <td>Exponential recursion analysis</td>
+            </tr>
+            <tr>
+              <td><strong>Generating Functions</strong></td>
+              <td class="formula-math-col">G(x) = ∑ a_n xⁿ</td>
+              <td>Formal power series</td>
+              <td>Target sum partition, coin change</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: CS APPLICATIONS - Deep Dive Portal
+         ======================================================================= -->
+    <section class="page-view" id="view-csapps" data-page-title="Computer Science Applications Portal">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">COMPUTER SCIENCE SYNTHESIS</span>
+          <span class="mca-badge">MCA Theory & Practice</span>
+        </div>
+        <h2 class="module-title">How Combinatorics Is Used in Computer Science</h2>
+        <p class="module-subtitle">
+          Combinatorics provides the structural and analytical vocabulary for modern computing. Here is how discrete counting governs core areas of MCA software engineering.
+        </p>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">🛡️</span> 1. Cryptography and Cyber Security</div>
+          <p class="card-description">
+            Cryptographic primitives rely directly on astronomical combinatorial search spaces to render brute-force attacks infeasible. RSA encryption utilizes Euler's totient function φ(n); AES substitution boxes (S-Boxes) require permutations without fixed points (derangements) to prevent linear cryptanalysis; and password hash security relies on sequence keyspaces |Σ|^L.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">⚡</span> 2. Algorithm Complexity and Master Theorem</div>
+          <p class="card-description">
+            Analyzing the time and space complexity of recursive algorithms requires solving recurrence relations. Divide-and-conquer algorithms (Merge Sort, Binary Search, Fast Fourier Transform) use recurrences solved analytically via the Master Theorem, while dynamic programming memoizes combinatorial overlapping subproblems.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">🗄️</span> 3. Database Query Optimization</div>
+          <p class="card-description">
+            Relational DBMS cost-based optimizers (CBO) evaluate join orders for queries involving multiple tables. The number of bushy join trees for n tables equals (2n - 2)! / (n - 1)!, while multi-predicate filter cardinality estimation utilizes the Principle of Inclusion–Exclusion.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">🗜️</span> 4. Data Compression & Hash Collisions</div>
+          <p class="card-description">
+            The Pigeonhole Principle proves that lossless data compression cannot compress all bitstrings of length n into shorter bitstrings without collision. In hash tables, when keys N exceed bucket count k, the Pigeonhole Principle guarantees that at least one bucket must have multiple items (requiring collision resolution).
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">🌐</span> 5. Network Topologies and Routing</div>
+          <p class="card-description">
+            Routing packet flows in toroidal meshes, hypercubes, and grid architectures utilizes combinatorial lattice paths. Graph theory, closely intertwined with combinatorics, models network reliability, minimum spanning trees, and maximum flow throughput.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="card-title-icon">🤖</span> 6. Artificial Intelligence & State Spaces</div>
+          <p class="card-description">
+            Game playing algorithms (Chess, Go), automated theorem proving, and combinatorial optimization (Traveling Salesperson Problem, Knapsack, Graph Coloring) evaluate permutation and partition search trees. Understanding branching factors and pruning techniques is rooted in combinatorics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: GLOSSARY - Mathematical and Computing Terms
+         ======================================================================= -->
+    <section class="page-view" id="view-glossary" data-page-title="Mathematical Glossary">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">LEXICON</span>
+          <span class="mca-badge">22+ Core Terms</span>
+        </div>
+        <h2 class="module-title">Mathematical & Computing Glossary</h2>
+        <p class="module-subtitle">
+          Searchable reference dictionary of discrete mathematics terminology used across Unit 1.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="form-group">
+          <label class="form-label" for="glossary-search-input">Search Terms, Categories, or Definitions</label>
+          <input type="text" class="form-input" id="glossary-search-input" placeholder="Type to filter: e.g. Pigeonhole, Partition, Derangement, Recurrence...">
+        </div>
+      </div>
+
+      <div id="glossary-container"></div>
+    </section>
+
+
+    <!-- =======================================================================
+         VIEW: ABOUT - Assignment Details & Faculty Evaluation Sheet
+         ======================================================================= -->
+    <section class="page-view" id="view-about" data-page-title="Assignment & Faculty Evaluation Sheet">
+      <div class="module-header">
+        <div class="module-meta-row">
+          <span class="unit-tag">MCA ASSIGNMENT DOCUMENT</span>
+          <span class="mca-badge">Academic Year 2026–27</span>
+        </div>
+        <h2 class="module-title">Assignment Submission & Faculty Viva Sheet</h2>
+        <p class="module-subtitle">
+          Official assignment documentation formatted for semester faculty evaluation. Print or save as PDF directly from this screen.
+        </p>
+      </div>
+
+      <!-- Formal Assignment Header Card -->
+      <div class="card" style="border:2px solid var(--accent-blue); margin-bottom:1.5rem;">
+        <div style="text-align:center; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.25rem;">
+          <h2 style="font-size:1.4rem; color:var(--text-primary); margin-bottom:0.25rem;">Master of Computer Applications (MCA) — Semester 1</h2>
+          <div style="font-size:1rem; color:var(--accent-blue); font-weight:700;">Foundation of Mathematics (Unit 1: Combinatorics and Its Applications)</div>
+          <div style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.2rem;">Title: <strong>“Combinatorics Learning Lab – Interactive Mathematics for Computing”</strong></div>
+        </div>
+
+        <div class="grid-2col" style="font-size:0.9rem;">
+          <div>
+            <div style="margin-bottom:0.4rem;"><strong>Student Name:</strong> <span class="display-student-name">Nilesh V.</span></div>
+            <div style="margin-bottom:0.4rem;"><strong>Enrolment Number:</strong> <span class="display-student-enrolment">MCA2026001</span></div>
+            <div style="margin-bottom:0.4rem;"><strong>Programme:</strong> <span class="display-student-programme">Master of Computer Applications</span></div>
+          </div>
+          <div>
+            <div style="margin-bottom:0.4rem;"><strong>Semester:</strong> <span class="display-student-semester">1</span> | <strong>Division:</strong> <span class="display-student-division">A</span></div>
+            <div style="margin-bottom:0.4rem;"><strong>Academic Year:</strong> <span class="display-student-year">2026–27</span></div>
+            <div style="margin-bottom:0.4rem;"><strong>Evaluation Mode:</strong> Faculty Viva & Live Interactive Demonstration</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-title">1. Project Objective & Scope</div>
+        <p class="card-description">
+          The primary objective of this assignment is to develop an interactive, mathematically rigorous, self-contained educational dashboard covering all 12 syllabus topics of Unit 1 (Combinatorics). The application operates entirely on frontend technologies (HTML5, CSS3, JavaScript ES6+) with zero backend dependencies, providing working calculators, step-by-step mathematical proofs, exact BigInt calculations, and tangible computer science case studies.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-title">2. Curriculum Alignment & Modules Implemented</div>
+        <table class="formula-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Unit 1 Topic</th>
+              <th>Interactive Calculator / Simulation</th>
+              <th>Tested Edge Cases</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Intro & CS Applications</td>
+              <td>Password keyspace exponential calculator & Grid routing paths</td>
+              <td>L=0, 0×n grid, BigInt &gt; 10¹⁸</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Basic Counting Principles</td>
+              <td>Addition Rule, Multiplication Rule, PC Hardware Configurator</td>
+              <td>0 choices, single choice pipeline</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Permutations (All 3 Cases)</td>
+              <td>nPr, distinct orders n!, n^r, repeated anagram multinomial analyzer</td>
+              <td>0! = 1, r &gt; n, repeated MISSISSIPPI</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Combinations & Identities</td>
+              <td>nCr, Pascal identity check, Symmetry check, Pascal pyramid</td>
+              <td>C(n, 0)=1, C(n, n)=1, r &gt; n</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Binomial Theorem</td>
+              <td>(a+b)^n algebraic expansion, terms table, direct substitution test</td>
+              <td>n=0, a=1 b=1 (∑=2ⁿ), a=1 b=-1 (∑=0)</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Pigeonhole Principle</td>
+              <td>Basic guarantee, Generalized ⌈N/k⌉, balls & boxes, Hash table collisions</td>
+              <td>N &lt; k, N = k, N = k+1</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Inclusion–Exclusion</td>
+              <td>2-set and 3-set calculators, constraint validator, dynamic SVG Venn</td>
+              <td>Disjoint sets, subset containment</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Derangements</td>
+              <td>Recurrence D(n)=(n-1)[D(n-1)+D(n-2)], 1/e limit, Monte Carlo trial</td>
+              <td>D(0)=1, D(1)=0, D(2)=1, D(4)=9</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Multisets & Stars/Bars</td>
+              <td>C(n+r-1, r), Stars & Bars visualizer, 4-models comparison matrix</td>
+              <td>r=0, n=1, r &gt; n valid multiset</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Partitions & Compositions</td>
+              <td>Integer partition p(n) via DP, compositions 2^(n-1), Ferrers diagram</td>
+              <td>n=1, n=2, DP table up to n=40</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Recurrence Relations</td>
+              <td>Fibonacci, Hanoi (2ⁿ-1), Merge Sort D&C, iterative vs recursive trace</td>
+              <td>Base cases n=0, n=1; call tree count</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Generating Functions</td>
+              <td>OGF convolution polynomial multiplier, coin change solver [x^S]</td>
+              <td>S=0, verified against DP change</td>
+              <td><span style="color:var(--accent-emerald); font-weight:700;">✓ Fully Working</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-title">3. Student Learning Outcomes & Reflections</div>
+        <p class="card-description">
+          Through the design and construction of this application, the following fundamental competencies were mastered:
+        </p>
+        <ul style="padding-left:1.2rem; font-size:0.88rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.4rem;">
+          <li>Deep mathematical understanding of discrete structures, combinatorics, factorials, and identities.</li>
+          <li>Precise computational implementation using modern JavaScript BigInt to eliminate floating-point and integer overflow errors.</li>
+          <li>Appreciation for the direct link between combinatorial counting and computational security, hash tables, algorithm runtime recurrences, and memory partitioning.</li>
+          <li>Development of responsive, intuitive UI/UX with dark/light theming, dynamic SVG/canvas rendering, and real-time step calculation traces.</li>
+        </ul>
+      </div>
+
+      <!-- Faculty Signature Strip -->
+      <div class="card" style="background:var(--bg-card-subtle); border-top:2px solid var(--accent-emerald);">
+        <div style="font-weight:700; font-size:1rem; color:var(--text-primary); margin-bottom:1.5rem;">Faculty Evaluation & Viva Sign-off</div>
+        <div class="grid-3col" style="font-size:0.85rem; color:var(--text-secondary);">
+          <div>
+            <div style="border-bottom:1px solid var(--border-color); height:40px;"></div>
+            <div style="margin-top:0.35rem;"><strong>Faculty Signature</strong></div>
+          </div>
+          <div>
+            <div style="border-bottom:1px solid var(--border-color); height:40px;"></div>
+            <div style="margin-top:0.35rem;"><strong>Date of Evaluation</strong></div>
+          </div>
+          <div>
+            <div style="border-bottom:1px solid var(--border-color); height:40px;"></div>
+            <div style="margin-top:0.35rem;"><strong>Grade / Marks Awarded</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- =========================================================================
+     STUDENT PROFILE EDIT MODAL
+     ========================================================================= -->
+<div class="modal-overlay" id="student-modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 style="font-size:1.15rem; font-weight:700; color:var(--text-primary);">Edit Student Evaluation Profile</h3>
+      <button class="modal-close-btn" aria-label="Close Modal">&times;</button>
+    </div>
+    <form id="student-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="profile-name">Student Full Name</label>
+          <input type="text" class="form-input" id="profile-name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profile-enrolment">Enrolment Number</label>
+          <input type="text" class="form-input" id="profile-enrolment" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="profile-programme">Programme</label>
+          <input type="text" class="form-input" id="profile-programme" value="Master of Computer Applications (MCA)">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profile-semester">Semester</label>
+          <input type="text" class="form-input" id="profile-semester" value="1">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="profile-division">Division / Batch</label>
+          <input type="text" class="form-input" id="profile-division" value="A">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profile-year">Academic Year</label>
+          <input type="text" class="form-input" id="profile-year" value="2026–27">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="action-btn modal-cancel-btn">Cancel</button>
+        <button type="submit" class="action-btn btn-primary">Save Profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- =========================================================================
+     SCRIPTS IN ORDER
+     ========================================================================= -->
+<script src="js/math-utils.js"></script>
+<script src="js/modules/module1.js"></script>
+<script src="js/modules/module2.js"></script>
+<script src="js/modules/module3.js"></script>
+<script src="js/modules/module4.js"></script>
+<script src="js/modules/module5.js"></script>
+<script src="js/modules/module6.js"></script>
+<script src="js/modules/module7.js"></script>
+<script src="js/modules/module8.js"></script>
+<script src="js/modules/module9.js"></script>
+<script src="js/modules/module10.js"></script>
+<script src="js/modules/module11.js"></script>
+<script src="js/modules/module12.js"></script>
+<script src="js/modules/quiz.js"></script>
+<script src="js/modules/glossary.js"></script>
+<script src="js/modules/demo.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
