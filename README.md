@@ -127,3 +127,5 @@ npx serve .
 - **Subject**: Foundation of Mathematics
 - **Unit**: Unit 1 — Combinatorics and Its Applications
 - **Academic Year**: 2026–27
+#   c o m b i n a t o r i c s - l e a r n i n g - l a b  
+ 
