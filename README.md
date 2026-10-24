@@ -78,10 +78,7 @@ Combinatorics_Learning_Lab/
 │       ├── quiz.js             # Dynamic MCQ exam with rotating question pool
 │       ├── glossary.js         # Searchable discrete mathematics glossary
 │       └── demo.js             # 1-click Faculty demonstration presets
-├── README.md                   # Full documentation & setup instructions
-├── TESTING_CHECKLIST.md        # Comprehensive test scenarios and boundary verification
-├── FACULTY_DEMO_SCRIPT.md      # 5-minute faculty presentation script
-└── SUBMISSION_TEMPLATE.md      # Email submission template for college portal
+└── README.md                   # Full documentation & setup instructions
 ```
 
 ---

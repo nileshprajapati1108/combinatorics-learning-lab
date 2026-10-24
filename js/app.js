@@ -10,11 +10,11 @@
     currentView: 'home',
     visitedModules: new Set(),
     studentProfile: {
-      name: 'Nilesh V.',
-      enrolment: 'MCA2026001',
+      name: 'Prajapati Nilesh',
+      enrolment: 'T2604010700072',
       programme: 'Master of Computer Applications (MCA)',
       semester: '1',
-      division: 'A',
+      division: 'B',
       academicYear: '2026–27'
     }
   };
@@ -54,7 +54,14 @@
     try {
       const savedProfile = localStorage.getItem('mca_student_profile');
       if (savedProfile) {
-        AppState.studentProfile = Object.assign(AppState.studentProfile, JSON.parse(savedProfile));
+        const parsed = JSON.parse(savedProfile);
+        if (parsed.name === 'Nilesh V.' || !parsed.name) {
+          parsed.name = 'Prajapati Nilesh';
+          if (parsed.enrolment === 'MCA2026001' || !parsed.enrolment) parsed.enrolment = 'T2604010700072';
+          if (parsed.division === 'A' || !parsed.division) parsed.division = 'B';
+          localStorage.setItem('mca_student_profile', JSON.stringify(parsed));
+        }
+        AppState.studentProfile = Object.assign(AppState.studentProfile, parsed);
       }
       const savedVisited = localStorage.getItem('mca_visited_modules');
       if (savedVisited) {
